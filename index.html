@@ -11,10 +11,28 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./assets/style/style.css">
+    <!-- <link rel="stylesheet" href="./assets/style/style.css" /> -->
     <script src="./assets/js/index.js"></script>
   </head>
   <body>
-    <h1>Hola estoy vivo</h1>
+    <header>
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">Navbar</span>
+          <form id="myForm" class="d-flex">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Buscar"
+              id="mySearch"
+            />
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+    <div class="container">
+      <div id="myData" class="row justify-content-center"></div>
+    </div>
   </body>
 </html>
