@@ -11,28 +11,41 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <!-- <link rel="stylesheet" href="./assets/style/style.css" /> -->
-    <script src="./assets/js/index.js"></script>
+    <link rel="stylesheet" href="./assets/style/style.css" />
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-dark bg-dark">
+      <nav class="navbar navbar-dark">
         <div class="container-fluid">
-          <span class="navbar-brand mb-0 h1">Navbar</span>
+          <span class="navbar-brand mb-0"
+            ><img
+              style="height: 30px"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSexM3Or_YhKYtiPXJogI2gSdAaFNyy6Ecw3g&usqp=CAU"
+              alt=""
+          /></span>
           <form id="myForm" class="d-flex">
             <input
               type="text"
-              class="form-control"
+              class="form-control border-bottom rounded-pill"
               placeholder="Buscar"
               id="mySearch"
             />
-            <button type="submit" class="btn btn-primary">Submit</button>
+
           </form>
         </div>
       </nav>
     </header>
-    <div class="container">
-      <div id="myData" class="row justify-content-center"></div>
+
+    <div class="">
+      <div class="row">
+        <div class="col-2 fixed-start" id="categories">
+          <h1>Categorias</h1>
+        </div>
+        <div class="col-10">
+          <div id="myData" class="row justify-content-center"></div>
+        </div>
+      </div>
     </div>
   </body>
+  <script src="./assets/js/index.js"></script>
 </html>

@@ -1,5 +1,16 @@
-* {
+*,
+body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+:root {
+  --color-gray: #746c70;
+  --color-cool-gray: #4e4f50;
+  --color-ivory: #e2ded0;
+  --color-blue-gray: #647c90;
+}
+
+nav {
+  background-color: #000000;
 }
