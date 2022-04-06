@@ -1,16 +1,35 @@
 *,
 body {
+  font-family: "Poppins", sans-serif;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  transition: display ease-in-out 0.2s;
+  -webkit-transition: display ease-in-out 0.2s;
+  -moz-transition: display ease-in-out 0.2s;
+  -ms-transition: display ease-in-out 0.2s;
+  -o-transition: display ease-in-out 0.2s;
 }
 :root {
   --color-gray: #746c70;
   --color-cool-gray: #4e4f50;
   --color-ivory: #e2ded0;
   --color-blue-gray: #647c90;
+  --bsale-orange: #ff6815;
+}
+#categories {
+  text-transform: capitalize;
 }
 
-nav {
-  background-color: #000000;
+.card:hover {
+  box-shadow: 0 30px 60px 0 rgb(0 11 40 / 14%);
+  transform: scale(1.02);
+  transition: all 0.2s linear;
+  -webkit-transform: scale();
+  -moz-transform: scale();
+  -ms-transform: scale();
+  -o-transform: scale();
+}
+.price {
+  color: var(--bsale-orange);
 }
