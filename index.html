@@ -76,14 +76,14 @@
                   Ordenar
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li class="dropdown-item">
-                    <a href="#">Alfabéticamente (A-Z)</a>
+                  <li class="dropdown-item" onclick="sortCardsByName()">
+                    Alfabéticamente (A-Z)
                   </li>
-                  <li class="dropdown-item">
-                    <a href="#">Menor precio</a>
+                  <li class="dropdown-item" onclick="sortCardsLowerPrice()">
+                    Menor precio
                   </li>
-                  <li class="dropdown-item">
-                    <a href="#">Mayor precio</a>
+                  <li class="dropdown-item" onclick="sortCardsHigherPrice()">
+                    Mayor precio
                   </li>
                 </ul>
               </li>
@@ -103,7 +103,7 @@
 
     <div class="container pt-4 justify-content-center">
       <div class="row">
-        <h2 class="col-12">Todos nuestros productos:</h2>
+        <h2 class="col-12" id="cards-title">Todos nuestros productos:</h2>
         <p id="filteredeBy"></p>
       </div>
       <div id="myData" class="row justify-content-center"></div>

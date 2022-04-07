@@ -1,6 +1,11 @@
-const cardsLayout = (data) => {
+let cardsArray = [];
+let myCategories = [];
+const cardsTitle = document.getElementById("cards-title");
+const cardsLayout = () => {
   const cardsNode = document.getElementById("myData");
-  data.map((product) => {
+  console.log(cardsArray);
+  cardsNode.innerHTML = "";
+  cardsArray.map((product) => {
     cardsNode.innerHTML += `<div class="my-card card col-12 col-md-6 col-lg-4 m-4  rounded" style="width: 18rem;">
     <div class="h-100 d-flex align-items-center border-bottom">
     <img src="${
@@ -23,24 +28,32 @@ const cardsLayout = (data) => {
   });
 };
 
-const getData = (async () => {
-  const PRODUCTS_URL = "http://localhost:3600/bsale/products";
+const getData = async (URL) => {
   try {
-    const request = await fetch(PRODUCTS_URL);
+    const request = await fetch(URL);
     const data = await request.json();
-    document.getElementById("myData").innerHTML = "";
-    cardsLayout(data);
+    cardsArray = data;
+    cardsLayout();
   } catch (error) {
-    console.log(error);
+    document.getElementById("myData").innerHTML =
+      "<p>Lo sentimos, no se encontraron resultados...</p>";
+    console.error(error);
   }
-})();
+};
+
+const initialData = () => {
+  cardsTitle.innerHTML = "Todos nuestros productos:";
+  const PRODUCTS_URL = "https://api-bsale-jeyker.herokuapp.com/bsale/products";
+  getData(PRODUCTS_URL);
+};
+initialData();
 
 const getCategory = (async () => {
-  const CATEGORY_URL = "http://localhost:3600/bsale/category";
+  const CATEGORY_URL = "https://api-bsale-jeyker.herokuapp.com/bsale/category";
   try {
     const request = await fetch(CATEGORY_URL);
     const data = await request.json();
-
+    myCategories = data;
     data.map(
       (a) =>
         (document.getElementById(
@@ -52,19 +65,10 @@ const getCategory = (async () => {
   }
 })();
 
-const filterByName = async (search) => {
-  const PRODUCTS_BY_NAME = `http://localhost:3600/bsale/products/name/${search}`;
-  try {
-    const request = await fetch(PRODUCTS_BY_NAME);
-    const data = await request.json();
-    console.log(data);
-    document.getElementById("myData").innerHTML = "";
-    cardsLayout(data);
-  } catch (error) {
-    document.getElementById("myData").innerHTML =
-      "<p>Lo sentimos, no se encontraron resultados...</p>";
-    console.error(error);
-  }
+const filterByName = (search) => {
+  cardsTitle.innerHTML = `Resultados para: <span style="text-transform: capitalize">${search}</span>`;
+  const PRODUCTS_BY_NAME = `https://api-bsale-jeyker.herokuapp.com/bsale/products/name/${search}`;
+  getData(PRODUCTS_BY_NAME);
 };
 
 const submitButton = document.getElementById("submitButton");
@@ -72,23 +76,30 @@ const myForm = document.getElementById("myForm");
 const search = document.getElementById("mySearch");
 
 search.addEventListener("keyup", (e) => {
-  e.target.value === "" ? getData() : filterByName(e.target.value);
+  e.target.value === "" ? initialData() : filterByName(e.target.value);
 });
 
-const filterByCategory = async (search) => {
-  const PRODUCTS_BY_CATEGORY = `http://localhost:3600/bsale/products/category/${search}`;
-  try {
-    const request = await fetch(PRODUCTS_BY_CATEGORY);
-    const data = await request.json();
-    cardsLayout(data);
-  } catch (error) {
-    console.error(error);
-  }
+const filterByCategory = (search) => {
+  cardsTitle.innerHTML = `Categoría: <span style="text-transform: capitalize">${
+    myCategories.find((a) => a.id === search).name
+  }</span>`;
+  const PRODUCTS_BY_CATEGORY = `https://api-bsale-jeyker.herokuapp.com/bsale/products/category/${search}`;
+  getData(PRODUCTS_BY_CATEGORY);
 };
 
 const filterCardsByCategory = (id) => {
-  document.getElementById("myData").innerHTML = "";
-  id === 0 ? getData() : filterByCategory(id);
+  id === 0 ? initialData() : filterByCategory(id);
 };
 
-
+const sortCardsByName = () => {
+  cardsArray.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+  cardsLayout();
+};
+sortCardsLowerPrice = () => {
+  cardsArray.sort((a, b) => a.price - b.price);
+  cardsLayout();
+};
+sortCardsHigherPrice = () => {
+  cardsArray.sort((a, b) => b.price - a.price);
+  cardsLayout();
+};
