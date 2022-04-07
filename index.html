@@ -58,7 +58,11 @@
                   class="dropdown-menu"
                   id="categories"
                   aria-labelledby="navbarDropdown"
-                ></ul>
+                >
+                  <li class="dropdown-item" onclick="filterCardsByCategory(0)">
+                    Todos los productos
+                  </li>
+                </ul>
               </li>
               <li class="nav-item dropdown">
                 <a
@@ -91,9 +95,6 @@
                 placeholder="Buscar"
                 id="mySearch"
               />
-              <button class="btn btn-outline-success" type="submit">
-                Search
-              </button>
             </form>
           </div>
         </div>
