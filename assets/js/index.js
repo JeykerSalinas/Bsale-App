@@ -60,7 +60,7 @@ const getCategory = (async () => {
       (a) =>
         (document.getElementById(
           "categories"
-        ).innerHTML += `<li class="dropdown-item" onclick="filterCardsByCategory(${a.id})" >${a.name}</li>`)
+        ).innerHTML += `<li class="dropdown-item" onclick="filterByCategory(${a.id})" >${a.name}</li>`)
     );
   } catch (error) {
     console.error(error);
@@ -82,14 +82,16 @@ search.addEventListener("keyup", (e) => {
 });
 
 const filterByCategory = (search) => {
-  search === 0
-    ? initialData()
-    : (cardsTitle.innerHTML = `Categoría: <span style="text-transform: capitalize">${
-        myCategories.find((a) => a.id === search).name
-      }</span>`);
+  if (search === 0) {
+    initialData();
+  } else {
+    cardsTitle.innerHTML = `Categoría: <span style="text-transform: capitalize">${
+      myCategories.find((a) => a.id === search).name
+    }</span>`;
 
-  const PRODUCTS_BY_CATEGORY = `https://api-bsale-jeyker.herokuapp.com/bsale/products/category/${search}`;
-  getData(PRODUCTS_BY_CATEGORY);
+    const PRODUCTS_BY_CATEGORY = `https://api-bsale-jeyker.herokuapp.com/bsale/products/category/${search}`;
+    getData(PRODUCTS_BY_CATEGORY);
+  }
 };
 
 const sortCardsByName = () => {
