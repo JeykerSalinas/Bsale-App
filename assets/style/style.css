@@ -33,3 +33,6 @@ body {
 .price {
   color: var(--bsale-orange);
 }
+.dropdown-item:hover {
+  cursor: pointer;
+}

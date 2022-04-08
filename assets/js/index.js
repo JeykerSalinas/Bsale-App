@@ -1,18 +1,21 @@
+const cardsTitle = document.getElementById("cards-title");
+const submitButton = document.getElementById("submitButton");
+const myForm = document.getElementById("myForm");
+const search = document.getElementById("mySearch");
+const cardsNode = document.getElementById("myData");
 let cardsArray = [];
 let myCategories = [];
-const cardsTitle = document.getElementById("cards-title");
+
 const cardsLayout = () => {
-  const cardsNode = document.getElementById("myData");
-  console.log(cardsArray);
   cardsNode.innerHTML = "";
   cardsArray.map((product) => {
     cardsNode.innerHTML += `<div class="my-card card col-12 col-md-6 col-lg-4 m-4  rounded" style="width: 18rem;">
-    <div class="h-100 d-flex align-items-center border-bottom">
-    <img src="${
-      product.url_image
-        ? product.url_image
-        : "https://www.bevi.com/static/files/0/ecommerce-default-product.png"
-    }" class="card-img-top img-fluid  " alt="${product.name}">
+  <div class="h-100 d-flex align-items-center border-bottom">
+  <img src="${
+    product.url_image
+      ? product.url_image
+      : "https://www.bevi.com/static/files/0/ecommerce-default-product.png"
+  }" class="card-img-top img-fluid  " alt="${product.name}">
     
     </div>
           <div class="card-body">
@@ -27,12 +30,6 @@ const cardsLayout = () => {
         </div>`;
   });
 };
-/**
- * Represents a book.
- * @constructor
- * @param {string} title - The title of the book.
- * @param {string} author - The author of the book.
- */
 const getData = async (URL) => {
   try {
     const request = await fetch(URL);
@@ -45,7 +42,6 @@ const getData = async (URL) => {
     console.error(error);
   }
 };
-
 const initialData = () => {
   cardsTitle.innerHTML = "Todos nuestros productos:";
   const PRODUCTS_URL = "https://api-bsale-jeyker.herokuapp.com/bsale/products";
@@ -76,10 +72,6 @@ const filterByName = (search) => {
   getData(PRODUCTS_BY_NAME);
 };
 
-const submitButton = document.getElementById("submitButton");
-const myForm = document.getElementById("myForm");
-const search = document.getElementById("mySearch");
-
 search.addEventListener("keyup", (e) => {
   e.target.value === "" ? initialData() : filterByName(e.target.value);
 });
@@ -100,11 +92,12 @@ const sortCardsByName = () => {
   cardsArray.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
   cardsLayout();
 };
-sortCardsLowerPrice = () => {
+
+const sortCardsLowerPrice = () => {
   cardsArray.sort((a, b) => a.price - b.price);
   cardsLayout();
 };
-sortCardsHigherPrice = () => {
+const sortCardsHigherPrice = () => {
   cardsArray.sort((a, b) => b.price - a.price);
   cardsLayout();
 };
