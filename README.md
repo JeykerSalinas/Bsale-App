@@ -21,7 +21,11 @@ _Para clonar este repositorio dirígete al siguiente link:_
 
 ## Descripción técnina 🛠️
 
-La aplicación ha sido desarrollada con JavaScript puro. Todas las peticiones provienen de la Api desplegada en el siguiente enlace: [https://api-bsale-jeyker.herokuapp.com/]()
+La aplicación ha sido desarrollada con JavaScript puro. Todas las peticiones provienen de la Api desplegada en el siguiente enlace: [https://api-bsale-jeyker.herokuapp.com/]().
+
+Las búsquedas de producto realizadas por el usuario, y el filtro por categorías son implementadas a nivel del servidor. 
+
+El dropdown que permite ordenar los productos funciona desde la capa de front.
 
 <!-- ## Wiki 📖
 
