@@ -1,6 +1,4 @@
 const cardsTitle = document.getElementById("cards-title");
-const submitButton = document.getElementById("submitButton");
-const myForm = document.getElementById("myForm");
 const search = document.getElementById("mySearch");
 const cardsNode = document.getElementById("myData");
 let cardsArray = [];
@@ -30,6 +28,7 @@ const cardsLayout = () => {
         </div>`;
   });
 };
+
 const getData = async (URL) => {
   try {
     const request = await fetch(URL);
@@ -42,8 +41,10 @@ const getData = async (URL) => {
     console.error(error);
   }
 };
+
 const initialData = () => {
   cardsTitle.innerHTML = "Todos nuestros productos:";
+
   const PRODUCTS_URL = "https://api-bsale-jeyker.herokuapp.com/bsale/products";
   getData(PRODUCTS_URL);
 };
@@ -68,6 +69,10 @@ const getCategory = (async () => {
 
 const filterByName = (search) => {
   cardsTitle.innerHTML = `Resultados para: <span style="text-transform: capitalize">${search}</span>`;
+  /**
+   * Enpoint de la API que filtra los productos por nombre
+   * @type {string}
+   */
   const PRODUCTS_BY_NAME = `https://api-bsale-jeyker.herokuapp.com/bsale/products/name/${search}`;
   getData(PRODUCTS_BY_NAME);
 };
@@ -77,15 +82,14 @@ search.addEventListener("keyup", (e) => {
 });
 
 const filterByCategory = (search) => {
-  cardsTitle.innerHTML = `Categoría: <span style="text-transform: capitalize">${
-    myCategories.find((a) => a.id === search).name
-  }</span>`;
+  search === 0
+    ? initialData()
+    : (cardsTitle.innerHTML = `Categoría: <span style="text-transform: capitalize">${
+        myCategories.find((a) => a.id === search).name
+      }</span>`);
+
   const PRODUCTS_BY_CATEGORY = `https://api-bsale-jeyker.herokuapp.com/bsale/products/category/${search}`;
   getData(PRODUCTS_BY_CATEGORY);
-};
-
-const filterCardsByCategory = (id) => {
-  id === 0 ? initialData() : filterByCategory(id);
 };
 
 const sortCardsByName = () => {
