@@ -4,6 +4,7 @@ const cardsNode = document.getElementById("myData");
 let cardsArray = [];
 let myCategories = [];
 
+//Function to render the cards
 const cardsLayout = () => {
   cardsNode.innerHTML = "";
   cardsArray.map((product) => {
@@ -28,7 +29,7 @@ const cardsLayout = () => {
         </div>`;
   });
 };
-
+//Function to get the data from the API
 const getData = async (URL) => {
   try {
     const request = await fetch(URL);
@@ -41,7 +42,7 @@ const getData = async (URL) => {
     console.error(error);
   }
 };
-
+//Function to get all the products
 const initialData = () => {
   cardsTitle.innerHTML = "Todos nuestros productos:";
 
@@ -49,7 +50,7 @@ const initialData = () => {
   getData(PRODUCTS_URL);
 };
 initialData();
-
+//Fucntion to get the categories
 const getCategory = (async () => {
   const CATEGORY_URL = "https://api-bsale-jeyker.herokuapp.com/bsale/category";
   try {
@@ -66,21 +67,17 @@ const getCategory = (async () => {
     console.error(error);
   }
 })();
-
+//Function to search the products by name
 const filterByName = (search) => {
   cardsTitle.innerHTML = `Resultados para: <span style="text-transform: capitalize">${search}</span>`;
-  /**
-   * Enpoint de la API que filtra los productos por nombre
-   * @type {string}
-   */
   const PRODUCTS_BY_NAME = `https://api-bsale-jeyker.herokuapp.com/bsale/products/name/${search}`;
   getData(PRODUCTS_BY_NAME);
 };
-
+//Keyup event to search the products by name
 search.addEventListener("keyup", (e) => {
   e.target.value === "" ? initialData() : filterByName(e.target.value);
 });
-
+//Function to filter the products by category
 const filterByCategory = (search) => {
   if (search === 0) {
     initialData();
@@ -93,16 +90,17 @@ const filterByCategory = (search) => {
     getData(PRODUCTS_BY_CATEGORY);
   }
 };
-
+//Function to sort the cards by name alphabetically
 const sortCardsByName = () => {
   cardsArray.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
   cardsLayout();
 };
-
+//Function to sort the cards by price (lowest to highest)
 const sortCardsLowerPrice = () => {
   cardsArray.sort((a, b) => a.price - b.price);
   cardsLayout();
 };
+//Function to sort the cards by price (highest to lowest)
 const sortCardsHigherPrice = () => {
   cardsArray.sort((a, b) => b.price - a.price);
   cardsLayout();
